@@ -1,5 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
+const WebpackPwaManifest = require("webpack-pwa-manifest");
 
 module.exports = {
     //The entry point is the root of the bundle and the beginning of the dependency graph, so give it the relative path to the client's code
@@ -20,6 +21,21 @@ module.exports = {
           $: "jquery",
           jQuery: "jquery"
         }),
+        new WebpackPwaManifest({
+          name: "Food Event",
+          short_name: "Foodies",
+          description: "An app that allows you to view upcoming food events.",
+          start_url: "../index.html",
+          background_color: "#01579b",
+          theme_color: "#ffffff",
+          fingerprints: false,
+          inject: false,
+          icons: [{
+            src: path.resolve("assets/img/icons/icon-512x512.png"),
+            sizes: [96, 128, 192, 256, 384, 512],
+            destination: path.join("assets", "icons")
+          }]
+        })
       ],
 
 //The final piece of our basic setup will provide the mode in which we want webpack to run. By default, webpack wants to run in production mode.
